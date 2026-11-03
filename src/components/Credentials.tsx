@@ -148,7 +148,7 @@ export function Beyond() {
               )}
             </p>
             <p className="body">{venture.body}</p>
-            <a href={venture.url} target="_blank" rel="noreferrer" className="btn btn-venture">
+            <a href={venture.url} className="btn btn-venture">
               <Pen size={15} /> {venture.cta}
               <small>{venture.urlLabel}</small>
             </a>

@@ -26,8 +26,6 @@ export const profile = {
   email: "wizzclint@gmail.com",
   phone: "+234 81 0107 4533",
   github: "https://github.com/wizzclint",
-  figma:
-    "https://www.figma.com/proto/7xAVrbxNlggW1mNOoI882Y/Nike-Sneaker-Store-App?node-id=43-9608&t=9Z9zZHNEWtVOtDxU-1",
   linkedin: "", // e.g. "https://www.linkedin.com/in/your-handle"
   credly: "", // a page listing all your certificates, if you have one
   photo: "/me.jpg",
@@ -37,6 +35,18 @@ export const profile = {
   footerBlurb:
     "Product designer, full-stack developer, and a person who genuinely enjoys a clean dataset.",
 };
+
+export function demoRequestUrl(project = "Portfolio walkthrough") {
+  const subject = "Demo request: " + project;
+  const body = "Hi Clinton,\n\nI'd like a private walkthrough of " + project + ".\n\nName:\nCompany or role:\nWhat I'd like to see:\nPreferred time and timezone:\n\nThank you!";
+  return "mailto:" + profile.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+}
+
+export const engineeringTools = [
+  { label: "Core project stack", tools: ["TypeScript", "Next.js", "React", "Python", "MongoDB", "SQL"] },
+  { label: "Additional tools I've worked with", tools: ["C++", "Java", "C#", "Go (Golang)", "Ruby", "Ruby on Rails"] },
+  { label: "Trading & Web3 projects", tools: ["Exchange APIs", "CCXT", "Solana", "Wallet adapters"] },
+];
 
 export const heroIntro = {
   // Plain text + highlighted fragments, rendered in order
@@ -77,6 +87,11 @@ export const marquee = [
   "Usability Testing",
   "Next.js",
   "TypeScript",
+  "C++",
+  "Java",
+  "C#",
+  "Go",
+  "Ruby on Rails",
   "React Native",
   "Tailwind CSS",
   "MongoDB",
@@ -100,6 +115,8 @@ export const about = {
     ["Focus", "Product design · Full-stack · Data"],
     ["Design", "Figma · Design systems · Prototyping · UX research"],
     ["Code", "TypeScript · Next.js · React Native · Python · PHP"],
+    ["Also worked with", "C++ · Java · C# · Go · Ruby / Rails"],
+    ["Trading & Web3", "AlphaBot collaboration · Solana wallet integration"],
     ["Data", "Excel · Data analysis · Dashboards · TensorFlow / Keras"],
     ["Contact", profile.phone],
   ],
@@ -158,7 +175,7 @@ export const capabilities = [
   },
 ];
 
-export const WORK_CATEGORIES = ["Design", "Web", "AI & Python"] as const;
+export const WORK_CATEGORIES = ["Systems & C++", "Trading & Web3", "Design", "Web", "AI & Python"] as const;
 
 export type WorkItem = {
   n: string;
@@ -166,11 +183,34 @@ export type WorkItem = {
   category: (typeof WORK_CATEGORIES)[number];
   description: string;
   tags: string[];
-  href: string;
-  linkLabel?: string;
+  credit?: string;
 };
 
 export const selectedWork: WorkItem[] = [
+  {
+    n: "LAB / C++17",
+    title: "Market Data Buffer Lab",
+    category: "Systems & C++",
+    description: "A new C++17 portfolio sample exploring two producer threads, bounded bid/ask queues, sequence checks and a local consumer. Uses synthetic normalized quotes; live WebSocket ingestion and latency validation are outside this sample.",
+    tags: ["C++17", "Multithreading", "Atomics", "Bounded buffers"],
+    credit: "New portfolio sample · source review available",
+  },
+  {
+    n: "COLLAB / TRADING",
+    title: "AlphaBot / ApexAlpha",
+    category: "Trading & Web3",
+    description: "Collaborator on an automated trading system with a Next.js dashboard, a separate trading engine, exchange integrations, paper trading and protective order handling. A private walkthrough covers the architecture and my contribution.",
+    tags: ["TypeScript", "Next.js", "CCXT", "MongoDB", "Exchange APIs"],
+    credit: "Collaborator · D734m / AlphaBot",
+  },
+  {
+    n: "COLLAB / WEB3",
+    title: "Flare",
+    category: "Trading & Web3",
+    description: "Collaborator on a Solana-connected web application with wallet connection flows and interactive account experiences. Built around Next.js, TypeScript, Solana Web3.js and wallet adapters.",
+    tags: ["Solana", "Web3.js", "Wallet adapters", "TypeScript", "Prisma"],
+    credit: "Collaborator · AJBrownson / flare",
+  },
   {
     n: "01 / 2026",
     title: "Nike Sneaker Store App",
@@ -178,8 +218,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "A mobile shopping experience for a sneaker store: product discovery, detail pages, cart and checkout, designed and prototyped end to end in Figma.",
     tags: ["Figma", "Mobile UI", "Prototyping"],
-    href: "https://www.figma.com/proto/7xAVrbxNlggW1mNOoI882Y/Nike-Sneaker-Store-App?node-id=43-9608&t=9Z9zZHNEWtVOtDxU-1",
-    linkLabel: "Open prototype",
   },
   {
     n: "02 / 2025",
@@ -188,8 +226,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "UI for a cross-platform mobile app, refined through usability testing so the experience holds up on both iOS and Android.",
     tags: ["Figma", "iOS & Android", "Usability testing"],
-    href: "https://www.figma.com/proto/T186MleKekrGWMKXXH7ZJd/FAITH?node-id=103-2547&page-id=0%3A1&starting-point-node-id=103%3A423&t=JBy7iwlhFGFiVkvo-1",
-    linkLabel: "Open prototype",
   },
   {
     n: "03 / 2024",
@@ -198,8 +234,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "A playful habit and self-regulation app that uses game mechanics to keep users coming back, from research through to high-fidelity screens.",
     tags: ["Figma", "UX Research", "Gamification"],
-    href: "https://www.figma.com/proto/dsRdFDSTSonts7sPB7qRtj/Gamified-Self-Regulation-App--Tobi?node-id=0-1&t=8MBbPSOWIkn6rh1x-1",
-    linkLabel: "Open prototype",
   },
   {
     n: "04 / 2026",
@@ -207,8 +241,6 @@ export const selectedWork: WorkItem[] = [
     category: "Web",
     description: "A food booking app: browse, book and manage orders, built with Next.js and TypeScript.",
     tags: ["Next.js", "TypeScript"],
-    href: "https://nextplate-eta.vercel.app",
-    linkLabel: "Visit live site",
   },
   {
     n: "05 / 2026",
@@ -217,8 +249,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "An essay, memoir and community site with sectioned reading pages and a dedicated long-form memoir reader.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    href: "https://fireflies-in-the-night.vercel.app",
-    linkLabel: "Visit live site",
   },
   {
     n: "06 / 2026",
@@ -227,8 +257,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "A deep-learning computer vision system that detects black bean aphid infestations from field images, with a GUI for real-time detection.",
     tags: ["Python", "TensorFlow / Keras", "CNN"],
-    href: "https://github.com/wizzclint/-Aphis-fabae-Pest-Detection-System-",
-    linkLabel: "View code",
   },
   {
     n: "07 / 2026",
@@ -237,8 +265,6 @@ export const selectedWork: WorkItem[] = [
     description:
       "An end-to-end career guidance chatbot that uses a TensorFlow neural network for intent classification to answer student questions on colleges, streams and subjects.",
     tags: ["Python", "TensorFlow", "NLP"],
-    href: "https://github.com/wizzclint/CounselBot-Career-Guidance-Chatbot-Recommendation-System",
-    linkLabel: "View code",
   },
   {
     n: "08 / 2026",
@@ -246,8 +272,6 @@ export const selectedWork: WorkItem[] = [
     category: "AI & Python",
     description: "A desktop GUI for hiding and recovering secret messages inside images.",
     tags: ["Python", "GUI", "Security"],
-    href: "https://github.com/wizzclint/image-steganography-with-python",
-    linkLabel: "View code",
   },
 ];
 
@@ -267,7 +291,6 @@ export const flagship = [
     ],
     tags: ["Next.js", "TypeScript", "MongoDB", "Tailwind CSS", "Recharts"],
     year: "2026",
-    live: "https://collatera-drab.vercel.app",
   },
   {
     kicker: "Cosmetics e-commerce",
@@ -284,7 +307,6 @@ export const flagship = [
     ],
     tags: ["Next.js 16", "TypeScript", "MongoDB", "Paystack", "Vitest"],
     year: "2026",
-    live: "",
   },
   {
     kicker: "Business operations app",
@@ -300,7 +322,6 @@ export const flagship = [
     ],
     tags: ["Next.js", "TypeScript", "NextAuth", "Google Sheets API"],
     year: "2026",
-    live: "https://new-ahmad-hq.vercel.app",
   },
 ];
 
@@ -390,9 +411,9 @@ export const venture = {
     "Wireframes → high-fidelity UI → design system",
     "Handoff docs engineers can build from",
   ],
-  url: profile.figma,
-  cta: "Open my Figma work",
-  urlLabel: "figma.com",
+  url: demoRequestUrl("Design prototypes"),
+  cta: "Request a design walkthrough",
+  urlLabel: "Private demo",
 };
 
 export const contact = {

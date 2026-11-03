@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { flagship, profile, selectedWork } from "@/data/profile";
+import { demoRequestUrl, flagship, profile, selectedWork } from "@/data/profile";
 import { copyText } from "@/lib/browser";
 import { TOOLS, selectTool } from "./lab/tools";
 import { toggleTheme } from "./Header";
@@ -40,8 +40,8 @@ export function CommandPalette() {
       ...[...selectedWork, ...flagship].map((p) => ({
         group: "Projects",
         label: p.title,
-        hint: "project",
-        run: () => go("work"),
+        hint: "request demo",
+        run: () => { window.location.href = demoRequestUrl(p.title); },
       })),
       { group: "Actions", label: "Toggle light / dark theme", hint: "theme", run: toggleTheme },
       {
@@ -53,7 +53,7 @@ export function CommandPalette() {
       ...(
         [
           ["Open GitHub", profile.github],
-          ["Open Figma work", profile.figma],
+          ["Request a design walkthrough", demoRequestUrl("Design prototypes")],
           ["Open LinkedIn", profile.linkedin],
         ] as const
       )
@@ -62,7 +62,7 @@ export function CommandPalette() {
           group: "Actions",
           label,
           hint: "external",
-          run: () => window.open(url, "_blank", "noopener"),
+          run: () => { if (url.startsWith("mailto:")) window.location.href = url; else window.open(url, "_blank", "noopener"); },
         })),
     ],
     [],

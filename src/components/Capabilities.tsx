@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { capabilities } from "@/data/profile";
+import { capabilities, engineeringTools } from "@/data/profile";
 import { Reveal, useInView } from "./Reveal";
 import { SectionHead } from "./SectionHead";
 
@@ -131,6 +131,14 @@ export function Capabilities() {
               </Reveal>
             ))}
           </div>
+        </div>
+        <div className="toolbox-grid">
+          {engineeringTools.map((group) => (
+            <Reveal className="card toolbox" key={group.label}>
+              <h3>{group.label}</h3>
+              <div className="tags">{group.tools.map((tool) => <span className="chip" key={tool}>{tool}</span>)}</div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

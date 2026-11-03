@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { contact, profile } from "@/data/profile";
+import { contact, demoRequestUrl, profile } from "@/data/profile";
 import { copyText } from "@/lib/browser";
 import { NAV } from "./Header";
 import { ArrowUpRight, Figma, GitHub, LinkedIn, Mail, Phone, Pin, Prompt } from "./Icons";
@@ -13,7 +13,7 @@ const stripProto = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 // Only links that are filled in on the profile get shown
 const links = [
   { label: "GitHub", url: profile.github, text: stripProto(profile.github), Icon: GitHub },
-  { label: "Figma", url: profile.figma, text: "Design prototypes on Figma", Icon: Figma },
+  { label: "Private demos", url: demoRequestUrl(), text: "Request a project or design walkthrough", Icon: Figma },
   { label: "LinkedIn", url: profile.linkedin, text: stripProto(profile.linkedin), Icon: LinkedIn },
 ].filter((l) => l.url);
 
@@ -70,7 +70,7 @@ export function Contact() {
               </a>
             )}
             {links.map(({ label, url, text, Icon }) => (
-              <a key={label} className="channel" href={url} target="_blank" rel="noreferrer">
+              <a key={label} className="channel" href={url} {...(url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>
                 <Icon size={18} />
                 <div>
                   <span className="eyebrow">{label}</span>
@@ -122,7 +122,7 @@ export function Footer() {
             <ul>
               {links.map((l) => (
                 <li key={l.label}>
-                  <a href={l.url} target="_blank" rel="noreferrer">{l.label} ↗</a>
+                  <a href={l.url} {...(l.url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>{l.label} ↗</a>
                 </li>
               ))}
               <li>

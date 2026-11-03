@@ -20,3 +20,16 @@ Everything personal (bio, skills, projects, experience, certificates, contact li
 ## Deploy
 
 Import the repo at [vercel.com/new](https://vercel.com/new). The default settings work as they are.
+
+## Private project walkthroughs
+
+Selected work and flagship builds show public summaries and illustrated overviews.
+All project CTAs use demoRequestUrl in src/data/profile.ts to open a
+prefilled email. Do not add deployment or source URLs to client-side project data.
+This controls portfolio navigation, not access to independently hosted apps or repositories.
+Their access must be managed separately at their own hosts.
+
+AlphaBot and Flare are credited as collaborations. Additional languages reflect
+the owner's stated experience; no additional proficiency scores are inferred.
+The C++ buffer lab is a new portfolio sample, not a previous client engagement
+or a live WebSocket implementation. See samples/market-data-buffer/README.md.

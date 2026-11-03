@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   capabilities,
+  engineeringTools,
+  demoRequestUrl,
   credentials,
   flagship,
   profile,
@@ -69,7 +71,10 @@ function exec(raw: string): Line[] | "clear" {
         out("Product & UI/UX design, full-stack development, and data analytics."),
       ];
     case "skills":
-      return capabilities.map((c) => out(`${c.name.padEnd(28)} ${bar(c.score)} ${c.score}`));
+      return [
+        ...capabilities.map((c) => out(`${c.name.padEnd(28)} ${bar(c.score)} ${c.score}`)),
+        ...engineeringTools.map((group) => out(`${group.label}: ${group.tools.join(" · ")}`)),
+      ];
     case "projects":
       return [...selectedWork, ...flagship].map((p) =>
         out(
@@ -94,7 +99,7 @@ function exec(raw: string): Line[] | "clear" {
         ...(
           [
             ["github", profile.github],
-            ["figma", profile.figma ? "figma.com (prototypes)" : ""],
+            ["demo", demoRequestUrl("Design prototypes")],
             ["linkedin", profile.linkedin],
           ] as const
         )
@@ -103,8 +108,8 @@ function exec(raw: string): Line[] | "clear" {
             out(
               <>
                 {k.padEnd(10)}
-                <a className="hl" href={k === "figma" ? profile.figma : v} target="_blank" rel="noreferrer">
-                  {v}
+                <a className="hl" href={v} target="_blank" rel="noreferrer">
+                  {k === "demo" ? "Request a private design walkthrough" : v}
                 </a>
               </>,
             ),

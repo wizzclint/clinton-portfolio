@@ -1350,6 +1350,36 @@ mark {
 }
 
 /* ───────── Flagship ───────── */
+.project-preview {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.project-preview svg { display: block; width: 100%; height: auto; }
+.preview-caption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 9px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+}
+.preview-caption span:last-child { display: inline-flex; align-items: center; gap: 5px; }
+.preview-caption span:last-child svg { width: 11px; }
+.project-access-note { display: flex; align-items: center; gap: 10px; color: var(--accent); margin-bottom: 24px; font-size: 13px; }
+.project-access-note svg { flex-shrink: 0; }
+.project-credit { color: var(--muted); font-size: 11px; font-family: var(--font-mono), monospace; margin: -5px 0 15px; }
+.toolbox-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.toolbox { padding: 24px; }
+.toolbox h3 { font-family: var(--font-display), sans-serif; font-size: 18px; }
+.flag-foot .run-link { margin-top: 0; }
+@media (max-width: 780px) { .toolbox-grid { grid-template-columns: 1fr; } }
+
 .flag-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
